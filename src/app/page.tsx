@@ -10,13 +10,14 @@ const Home = () => {
   const nameRef = React.useRef<HTMLInputElement>(null);
   const lightRef = React.useRef<HTMLSelectElement>(null)
   const waterRef = React.useRef<HTMLSelectElement>(null)
-
+const noteRef = React.useRef<HTMLTextAreaElement>(null)
   const handleClick = (e: React.FormEvent) => {
     e.preventDefault();
     const plantName = nameRef.current?.value || "";
     const lightLevel = lightRef.current?.value || ""
     const waterFrequency = waterRef.current?.value || ""
-    setPlants([...plants, { plantName, lightLevel, waterFrequency }]);
+    const note = noteRef.current?.value || ""
+    setPlants([...plants, { plantName, lightLevel, waterFrequency, note }]);
     console.log(plants);
   };
 
@@ -43,6 +44,7 @@ const Home = () => {
           <option value="Every 14 days">Every 14 days</option>
           <option value="Every 30 days">Every 30 days</option>
         </select>
+        <textarea ref={noteRef}></textarea>
         <button onClick={handleClick}>Add Plant</button>
       </form>
       <section>
@@ -51,6 +53,9 @@ const Home = () => {
             return (
               <li key={index}>
                 <h2>{plant.plantName}</h2>
+                <p>{plant.lightLevel}</p>
+                <p>{plant.waterFrequency}</p>
+                <p>{plant.note}</p>
               </li>
             )
           })}
