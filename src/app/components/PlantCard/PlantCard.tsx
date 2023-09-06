@@ -23,7 +23,7 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
         return (
           <article key={index}>
             <button>Edit</button>
-            <button>Delete</button>
+            <button onClick={() => setShowDeleteCheck(true)}>Delete</button>
             <h2>{plant.plantName}</h2>
             <p>{plant.lightLevel}</p>
             <p>{plant.waterFrequency}</p>
@@ -37,7 +37,7 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
       title="Are You Sure?"
       message="Once Plant is Deleted it Cannot be Restored"
       onConfirm={handleDeleteConfirmed}
-      onCancel={setShowDeleteCheck(false)}
+      onCancel={() => setShowDeleteCheck(false)}
       />
       </>
   )
