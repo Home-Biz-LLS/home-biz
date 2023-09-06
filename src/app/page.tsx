@@ -1,20 +1,22 @@
 "use client";
 import Image from "next/image";
-import { useRef } from "react";
-
-type PlantT = {
-  plantName: string;
-};
+import { PlantT } from "./types";
+import React from "react";
 
 const Home = () => {
-  const nameRef = useRef<HTMLInputElement>(null);
-  const plants: PlantT[] = [];
+  const [plants, setPlants] = React.useState<PlantT[]>([]);
+
+  const nameRef = React.useRef<HTMLInputElement>(null);
+
+  // const plants: PlantT[] = [];
+
   const handleClick = (e: React.FormEvent) => {
     e.preventDefault();
     const plantName = nameRef.current?.value || " ";
-    plants.push({ plantName });
+    setPlants([...plants, { plantName }]);
     console.log(plants);
   };
+
   return (
     <>
       <h1>This is HOME_BIZ</h1>
@@ -30,11 +32,13 @@ const Home = () => {
       </form>
       <section>
         <ul>
-          <li>
-            <div>
-              {/* <h2>{plants[0].plantName}</h2> */}
-            </div>
-          </li>
+          {plants.map((plant, index) => {
+            return (
+              <li key={index}>
+                <h2>{plant.plantName}</h2>
+              </li>
+            )
+          })}
         </ul>
       </section>
     </>
