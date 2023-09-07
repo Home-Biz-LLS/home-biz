@@ -9,7 +9,7 @@ const Home = () => {
 
   return (
     <>
-      <h1>This is HOME_BIZ</h1>
+      <h1 className="text-3xl text-center py-8">This is HOME_BIZ</h1>
       <AddPlant plants={plants} setPlants={setPlants}/>
       <PlantCard plants={plants} setPlants={setPlants}/>
     </>
