@@ -34,7 +34,7 @@ const AddPlant: React.FC<AddPlantProps> = ({ plants, setPlants }) => {
     });
   };
   return (
-    <form className="flex flex-col items-center border-solid border-2 border-black mx-28 rounded-xl py-8 text-center min-w-[400px]">
+    <form className="flex flex-col items-center border-solid border-2 border-black mx-28 rounded-xl py-8 text-center min-w-[300px]">
       <h2 className="text-2xl py-4">Add Plant</h2>
       <label htmlFor="plant_name">Plant Name</label>
       <input

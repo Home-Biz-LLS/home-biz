@@ -40,7 +40,7 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
       <section>
         {plants.map((plant) => {
           return (
-            <article className=" gap-1 flex flex-col items-center border-solid border-2 border-black rounded-md mx-28 my-8 p-8 min-w-[400px]" key={plant.id}>
+            <article className=" gap-1 flex flex-col items-center border-solid border-2 border-black rounded-md mx-28 my-8 p-8 min-w-[300px]" key={plant.id}>
               {plant.isEditing && isEditing ? (
                 <>
                   <label htmlFor="plant_name">Plant Name</label>
