@@ -49,7 +49,7 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
                     className="border-solid border-2 border-black rounded-md px-1 mb-1"
                     ref={nameRef}
                     type="text"
-                    placeholder="plant name"
+                    placeholder=""
                     defaultValue={plant.plantName}
                   />
                   <select className="text-center border-solid border-2 border-black rounded-md mb-1" ref={lightRef} defaultValue={plant.lightLevel}>
