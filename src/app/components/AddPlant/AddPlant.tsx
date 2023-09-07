@@ -1,5 +1,8 @@
 import React from 'react'
 import { PlantT } from '@/app/types';
+import { v4 as uuidv4 } from 'uuid';
+
+
 
 type AddPlantProps = {
   plants: PlantT[];
@@ -7,17 +10,21 @@ type AddPlantProps = {
 }
 
 const AddPlant: React.FC<AddPlantProps> = ({plants, setPlants}) => {
+
   const nameRef = React.useRef<HTMLInputElement>(null);
   const lightRef = React.useRef<HTMLSelectElement>(null)
   const waterRef = React.useRef<HTMLSelectElement>(null)
   const noteRef = React.useRef<HTMLTextAreaElement>(null)
+
   const handleClick = (e: React.FormEvent) => {
     e.preventDefault();
+    const id = uuidv4()
     const plantName = nameRef.current?.value || "";
     const lightLevel = lightRef.current?.value || ""
     const waterFrequency = waterRef.current?.value || ""
     const note = noteRef.current?.value || ""
-    setPlants([...plants, { plantName, lightLevel, waterFrequency, note }]);
+    const isEditing = false
+    setPlants([...plants, {id, isEditing, plantName, lightLevel, waterFrequency, note }]);
 
     const refs = [nameRef, lightRef, waterRef, noteRef];
     refs.forEach((ref) => {
