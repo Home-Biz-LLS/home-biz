@@ -19,18 +19,23 @@ model User {
 }
 
 model Plant {
-  id Int @id @default(autoincrement())
-  name String
-  waterFrequency WaterFrequency
-  lightLevel LightLevel
-  user User @relation(fields: [userId], references: [id])
-  userId Int
+  id                 Int                @id @default(autoincrement())
+  name               String
+  waterFrequency     WaterFrequency
+  fertiliseFrequency FertiliseFrequency
+  lightLevel         LightLevel
+  user               User               @relation(fields: [userId], references: [id])
+  userId             Int
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
 }
 
 enum WaterFrequency {
-  WEEKLY
-  BIWEEKLY
-  MONTHLY
+  DAYS
+}
+
+enum FertiliseFrequency {
+  DAYS
 }
 
 enum LightLevel {
