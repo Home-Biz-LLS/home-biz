@@ -16,6 +16,7 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
   const plantTypeRef = React.useRef<HTMLInputElement>(null);
   const lightRef = React.useRef<HTMLSelectElement>(null);
   const waterRef = React.useRef<HTMLSelectElement>(null);
+  const lastWateredRef = React.useRef<HTMLInputElement>(null);
   const noteRef = React.useRef<HTMLTextAreaElement>(null);
 
   const handleDeleteConfirmed = (id: string) => {
@@ -33,6 +34,7 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
       plant.plantName = nameRef.current?.value || "";
       plant.plantType = plantTypeRef.current?.value || "";
       plant.waterFrequency = waterRef.current?.value || "";
+      plant.lastWatered = lastWateredRef.current?.value || "";
       plant.note = noteRef.current?.value || "";
     }
   };
@@ -90,6 +92,14 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
                     <option value="Every 14 days">Every 14 days</option>
                     <option value="Every 30 days">Every 30 days</option>
                   </select>
+                  <label htmlFor="last_watered">Last Watered</label>
+                  <input
+                    className="border-solid border-2 border-black rounded-md mb-1 text-center"
+                    ref={lastWateredRef}
+                    type="date"
+                    id="last_watered"
+                    name="last_watered"
+                  ></input>
                   <label htmlFor="plant_note">Note</label>
                   <textarea
                     id="plant_note"
