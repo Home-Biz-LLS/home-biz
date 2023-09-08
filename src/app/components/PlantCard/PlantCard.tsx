@@ -13,6 +13,7 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
   const [showDeleteCheck, setShowDeleteCheck] = React.useState(false);
 
   const nameRef = React.useRef<HTMLInputElement>(null);
+  const plantTypeRef = React.useRef<HTMLInputElement>(null);
   const lightRef = React.useRef<HTMLSelectElement>(null);
   const waterRef = React.useRef<HTMLSelectElement>(null);
   const noteRef = React.useRef<HTMLTextAreaElement>(null);
@@ -30,6 +31,7 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
     if (plant) {
       plant.lightLevel = lightRef.current?.value || "";
       plant.plantName = nameRef.current?.value || "";
+      plant.plantType = plantTypeRef.current?.value || "";
       plant.waterFrequency = waterRef.current?.value || "";
       plant.note = noteRef.current?.value || "";
     }
@@ -40,7 +42,10 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
       <section>
         {plants.map((plant) => {
           return (
-            <article className=" gap-1 flex flex-col items-center border-solid border-2 border-black rounded-md mx-28 my-8 p-8 min-w-[300px]" key={plant.id}>
+            <article
+              className=" gap-1 flex flex-col items-center border-solid border-2 border-black rounded-md mx-28 my-8 p-8 min-w-[300px]"
+              key={plant.id}
+            >
               {plant.isEditing && isEditing ? (
                 <>
                   <label htmlFor="plant_name">Plant Name</label>
@@ -52,7 +57,20 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
                     placeholder=""
                     defaultValue={plant.plantName}
                   />
-                  <select className="text-center border-solid border-2 border-black rounded-md mb-1" ref={lightRef} defaultValue={plant.lightLevel}>
+                  <label htmlFor="plant_species">Plant Species</label>
+                  <input
+                    ref={plantTypeRef}
+                    id="plant_species"
+                    className="border-solid border-2 border-black rounded-md px-1 mb-1"
+                    type="text"
+                    defaultValue={plant.plantType}
+                    placeholder=""
+                  />
+                  <select
+                    className="text-center border-solid border-2 border-black rounded-md mb-1"
+                    ref={lightRef}
+                    defaultValue={plant.lightLevel}
+                  >
                     <option disabled value="">
                       Light Level
                     </option>
@@ -60,7 +78,11 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
                     <option value="Indirect Light">Indirect Light</option>
                     <option value="Low Light">Low Light</option>
                   </select>
-                  <select className="text-center border-solid border-2 border-black rounded-md mb-1" ref={waterRef} defaultValue={plant.waterFrequency}>
+                  <select
+                    className="text-center border-solid border-2 border-black rounded-md mb-1"
+                    ref={waterRef}
+                    defaultValue={plant.waterFrequency}
+                  >
                     <option disabled value="">
                       Water Frequency
                     </option>
@@ -75,8 +97,8 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
                     ref={noteRef}
                     defaultValue={plant.note}
                   ></textarea>
-
-                  <button className="border-solid border-2 border-black rounded-md p-2"
+                  <button
+                    className="border-solid border-2 border-black rounded-md p-2"
                     onClick={() => {
                       handleUpdatePlant(plant.id);
                       plant.isEditing = false;
@@ -85,7 +107,8 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
                   >
                     Save
                   </button>
-                  <button className="border-solid border-2 border-black rounded-md p-2"
+                  <button
+                    className="border-solid border-2 border-black rounded-md p-2"
                     onClick={() => {
                       plant.isEditing = false;
                       setIsEditing(false);
@@ -96,7 +119,8 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
                 </>
               ) : (
                 <>
-                  <button className="border-solid border-2 border-black rounded-md p-2"
+                  <button
+                    className="border-solid border-2 border-black rounded-md p-2"
                     onClick={() => {
                       setIsEditing(true);
                       plant.isEditing = true;
@@ -104,7 +128,8 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
                   >
                     Edit
                   </button>
-                  <button className="border-solid border-2 border-black rounded-md p-2"
+                  <button
+                    className="border-solid border-2 border-black rounded-md p-2"
                     onClick={
                       // () => setShowDeleteCheck(true)
                       () => {
@@ -115,8 +140,10 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
                     Delete
                   </button>
                   <h2 className="text-lg font-bold">{plant.plantName}</h2>
+                  <h3>{plant.plantType}</h3>
                   <p>Light Level: {plant.lightLevel}</p>
                   <p>Water frequency: {plant.waterFrequency}</p>
+                  <p>Last Watered: {plant.lastWatered}</p>
                   <p>Note: {plant.note}</p>
                 </>
               )}
