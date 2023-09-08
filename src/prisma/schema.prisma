@@ -32,10 +32,14 @@ model Plant {
 
 enum WaterFrequency {
   DAYS
+  WEEKS
+  MONTHS
 }
 
 enum FertiliseFrequency {
   DAYS
+  WEEKS
+  MONTHS
 }
 
 enum LightLevel {
