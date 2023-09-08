@@ -15,7 +15,7 @@ const AddPlant: React.FC<AddPlantProps> = ({ plants, setPlants }) => {
   const lastWateredRef = React.useRef<HTMLInputElement>(null)
   const noteRef = React.useRef<HTMLTextAreaElement>(null);
 
-  const handleClick = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const id = uuidv4();
     const plantName = nameRef.current?.value || "";
@@ -37,6 +37,14 @@ const AddPlant: React.FC<AddPlantProps> = ({ plants, setPlants }) => {
       }
     });
   };
+
+  const enterKey = (event: React.KeyboardEvent) => {
+    if(!event.shiftKey && event.key === "Enter") {
+      event.preventDefault(); 
+      handleSubmit(event);
+    }
+  };
+
   return (
     <form className="flex flex-col items-center border-solid border-2 border-black mx-28 rounded-xl py-8 text-center min-w-[300px]">
       <h2 className="text-2xl py-4">Add Plant</h2>
@@ -91,10 +99,11 @@ const AddPlant: React.FC<AddPlantProps> = ({ plants, setPlants }) => {
         className="border-solid border-2 border-black rounded-md mb-4 px-2 py-0.5"
         id="note"
         ref={noteRef}
+        onKeyDown={enterKey}
       ></textarea>
       <button
         className="border-solid border-2 border-black rounded-md p-2"
-        onClick={handleClick}
+        onClick={handleSubmit}
       >
         Add Plant
       </button>
