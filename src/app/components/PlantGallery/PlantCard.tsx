@@ -5,12 +5,14 @@ type PlantCardProps = {
   statusEdit: (value: boolean) => void;
   handleDelete: (value: string) => void;
   plant: PlantT;
+  handleWaterPlant: (id: string) => void;
 };
 
 const PlantCard: React.FC<PlantCardProps> = ({
   statusEdit,
   handleDelete,
   plant,
+  handleWaterPlant
 }) => {
   return (
     <>
@@ -33,6 +35,7 @@ const PlantCard: React.FC<PlantCardProps> = ({
       >
         Delete
       </button>
+      <button className="border-solid border-2 border-black rounded-md p-2" onClick={() => handleWaterPlant(plant.id)}>Water Plant</button>
       <h2 className="text-lg font-bold">{plant.plantName}</h2>
       <h3>{plant.plantType}</h3>
       <p>Light Level: {plant.lightLevel}</p>

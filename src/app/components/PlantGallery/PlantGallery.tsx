@@ -42,7 +42,17 @@ const PlantGallery: React.FC<PlantGalleryProps> = ({ plants, setPlants }) => {
       plant.lastWatered = lastWateredRef.current?.value || "";
       plant.note = noteRef.current?.value || "";
     }
+
   };
+
+  const handleWaterPlant = (id: string) => {
+    const copyOfPlants = plants;
+    const plant = copyOfPlants.find((plant) => plant.id === id);
+    if(plant) {
+      plant.lastWatered = new Date().toISOString().substring(0,10)
+    }
+    setPlants([...plants])
+  }
 
   return (
     <>
@@ -71,6 +81,7 @@ const PlantGallery: React.FC<PlantGalleryProps> = ({ plants, setPlants }) => {
                   statusEdit={handleEdit}
                   handleDelete={handleDeleteConfirmed}
                   plant={plant}
+                  handleWaterPlant={handleWaterPlant}
                 />
               )}
             </article>
