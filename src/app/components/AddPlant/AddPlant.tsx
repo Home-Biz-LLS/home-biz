@@ -45,12 +45,17 @@ const AddPlant: React.FC<AddPlantProps> = ({ plants, setPlants }) => {
       },
     ]);
 
-    const refs = [nameRef, lightRef, waterRefInt, waterRefUnit, noteRef];
+    const refs = [nameRef, plantTypeRef, noteRef];
     refs.forEach((ref) => {
       if (ref.current) {
         ref.current.value = "";
       }
     });
+    if (waterRefInt.current && waterRefUnit.current && lastWateredRef.current) {
+      waterRefInt.current.value = "1";
+      waterRefUnit.current.value = "Day(s)";
+      lastWateredRef.current.value = "yyyy-mm-dd";
+    }
   };
 
   const enterKey = (event: React.KeyboardEvent) => {
