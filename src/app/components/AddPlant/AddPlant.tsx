@@ -11,10 +11,13 @@ const AddPlant: React.FC<AddPlantProps> = ({ plants, setPlants }) => {
   const nameRef = React.useRef<HTMLInputElement>(null);
   const plantTypeRef = React.useRef<HTMLInputElement>(null);
   const lightRef = React.useRef<HTMLSelectElement>(null);
-  const waterRefInt = React.useRef<HTMLInputElement>(null)
+  const waterRefInt = React.useRef<HTMLInputElement>(null);
   const waterRefUnit = React.useRef<HTMLSelectElement>(null);
-  const lastWateredRef = React.useRef<HTMLInputElement>(null)
+  const lastWateredRef = React.useRef<HTMLInputElement>(null);
   const noteRef = React.useRef<HTMLTextAreaElement>(null);
+
+  const lightOptions = ["Bright Light", "Indirect Light", "Low Light"];
+  const waterFreqUnitOptions = ["Day(s)", "Week(s)", "Month(s)"];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,12 +27,22 @@ const AddPlant: React.FC<AddPlantProps> = ({ plants, setPlants }) => {
     const lightLevel = lightRef.current?.value || "";
     const waterFrequencyInt = waterRefInt.current?.value || "";
     const waterFrequencyUnit = waterRefUnit.current?.value || "";
-    const lastWatered = lastWateredRef.current?.value || ""
+    const lastWatered = lastWateredRef.current?.value || "";
     const note = noteRef.current?.value || "";
     const isEditing = false;
     setPlants([
       ...plants,
-      { id, isEditing, plantName, plantType, lightLevel, waterFrequencyUnit, waterFrequencyInt, lastWatered, note },
+      {
+        id,
+        isEditing,
+        plantName,
+        plantType,
+        lightLevel,
+        waterFrequencyUnit,
+        waterFrequencyInt,
+        lastWatered,
+        note,
+      },
     ]);
 
     const refs = [nameRef, lightRef, waterRefInt, waterRefUnit, noteRef];
@@ -41,8 +54,8 @@ const AddPlant: React.FC<AddPlantProps> = ({ plants, setPlants }) => {
   };
 
   const enterKey = (event: React.KeyboardEvent) => {
-    if(!event.shiftKey && event.key === "Enter") {
-      event.preventDefault(); 
+    if (!event.shiftKey && event.key === "Enter") {
+      event.preventDefault();
       handleSubmit(event);
     }
   };
@@ -73,37 +86,41 @@ const AddPlant: React.FC<AddPlantProps> = ({ plants, setPlants }) => {
         ref={lightRef}
         defaultValue="Light Level"
       >
-        <option disabled value="">
-          Light Level
-        </option>
-        <option value="Bright Light">Bright Light</option>
-        <option value="Indirect Light">Indirect Light</option>
-        <option value="Low Light">Low Light</option>
+        {lightOptions.map((lightOption, index) => {
+          return (
+            <option key={index} value={lightOption}>
+              {lightOption}
+            </option>
+          );
+        })}
       </select>
       <label htmlFor="water_freq">Watering interval</label>
       <div className="border-solid border-2 border-black rounded-md mb-1 p-px">
-    <input type="number" className="text-center" ref={waterRefInt} defaultValue="1" min={1}/>
-    <select ref={waterRefUnit} defaultValue="Day(s)">
-      <option value="Day">Day(s)</option>
-      <option value="Week">Week(s)</option>
-      <option value="Month">Month(s)</option>
-    </select>
-    </div>
-      {/* <select
-        className="border-solid border-2 border-black rounded-md mb-1 text-center"
-        id="water_freq"
-        ref={waterRef}
-        defaultValue="Water Frequency"
-      >every 
-        <option disabled value="">
-          Water Frequency
-        </option>
-        <option value="Every 7 days">Every 7 days</option>
-        <option value="Every 14 days">Every 14 days</option>
-        <option value="Every 30 days">Every 30 days</option> days
-      </select> */}
+        <input
+          type="number"
+          className="text-center"
+          ref={waterRefInt}
+          defaultValue="1"
+          min={1}
+        />
+        <select ref={waterRefUnit} defaultValue="Day(s)">
+          {waterFreqUnitOptions.map((waterOption, index) => {
+            return (
+              <option key={index} value={waterOption}>
+                {waterOption}
+              </option>
+            );
+          })}
+        </select>
+      </div>
       <label htmlFor="last_watered">Last Watered</label>
-      <input className="border-solid border-2 border-black rounded-md mb-1 text-center" ref={lastWateredRef} type="date" id="last_watered" name="last_watered"></input>
+      <input
+        className="border-solid border-2 border-black rounded-md mb-1 text-center"
+        ref={lastWateredRef}
+        type="date"
+        id="last_watered"
+        name="last_watered"
+      ></input>
       <label htmlFor="note">Note</label>
       <textarea
         className="border-solid border-2 border-black rounded-md mb-4 px-2 py-0.5"
