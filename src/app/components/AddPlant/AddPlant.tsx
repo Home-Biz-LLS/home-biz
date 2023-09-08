@@ -32,7 +32,7 @@ const AddPlant: React.FC<AddPlantProps> = ({ plants, setPlants }) => {
       { id, isEditing, plantName, plantType, lightLevel, waterFrequencyUnit, waterFrequencyInt, lastWatered, note },
     ]);
 
-    const refs = [nameRef, lightRef, waterRefInt, waterRefUnit,noteRef];
+    const refs = [nameRef, lightRef, waterRefInt, waterRefUnit, noteRef];
     refs.forEach((ref) => {
       if (ref.current) {
         ref.current.value = "";
@@ -81,9 +81,9 @@ const AddPlant: React.FC<AddPlantProps> = ({ plants, setPlants }) => {
         <option value="Low Light">Low Light</option>
       </select>
       <label htmlFor="water_freq">Watering interval</label>
-      <div className="border-solid border-2 border-black rounded-md mb-1">
-    <input type="number" className="text-center" ref={waterRefInt}/>
-    <select ref={waterRefUnit}>
+      <div className="border-solid border-2 border-black rounded-md mb-1 p-px">
+    <input type="number" className="text-center" ref={waterRefInt} defaultValue="1" min={1}/>
+    <select ref={waterRefUnit} defaultValue="Day(s)">
       <option value="Day">Day(s)</option>
       <option value="Week">Week(s)</option>
       <option value="Month">Month(s)</option>
