@@ -24,11 +24,8 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
     setShowDeleteCheck(false);
   };
   const handleUpdatePlant = (id: string) => {
-    console.log(id);
-    console.log(plants);
     const copyOfPlants = plants;
-    const plant = copyOfPlants.find((x) => x.id === id);
-    console.log(plant);
+    const plant = copyOfPlants.find((plant) => plant.id === id);
     if (plant) {
       plant.lightLevel = lightRef.current?.value || "";
       plant.plantName = nameRef.current?.value || "";
