@@ -11,7 +11,8 @@ const AddPlant: React.FC<AddPlantProps> = ({ plants, setPlants }) => {
   const nameRef = React.useRef<HTMLInputElement>(null);
   const plantTypeRef = React.useRef<HTMLInputElement>(null);
   const lightRef = React.useRef<HTMLSelectElement>(null);
-  const waterRef = React.useRef<HTMLSelectElement>(null);
+  const waterRefInt = React.useRef<HTMLInputElement>(null)
+  const waterRefUnit = React.useRef<HTMLSelectElement>(null);
   const lastWateredRef = React.useRef<HTMLInputElement>(null)
   const noteRef = React.useRef<HTMLTextAreaElement>(null);
 
@@ -21,16 +22,17 @@ const AddPlant: React.FC<AddPlantProps> = ({ plants, setPlants }) => {
     const plantName = nameRef.current?.value || "";
     const plantType = plantTypeRef.current?.value || "";
     const lightLevel = lightRef.current?.value || "";
-    const waterFrequency = waterRef.current?.value || "";
+    const waterFrequencyInt = waterRefInt.current?.value || "";
+    const waterFrequencyUnit = waterRefUnit.current?.value || "";
     const lastWatered = lastWateredRef.current?.value || ""
     const note = noteRef.current?.value || "";
     const isEditing = false;
     setPlants([
       ...plants,
-      { id, isEditing, plantName, plantType, lightLevel, waterFrequency, lastWatered, note },
+      { id, isEditing, plantName, plantType, lightLevel, waterFrequencyUnit, waterFrequencyInt, lastWatered, note },
     ]);
 
-    const refs = [nameRef, lightRef, waterRef, noteRef];
+    const refs = [nameRef, lightRef, waterRefInt, waterRefUnit,noteRef];
     refs.forEach((ref) => {
       if (ref.current) {
         ref.current.value = "";
@@ -78,20 +80,28 @@ const AddPlant: React.FC<AddPlantProps> = ({ plants, setPlants }) => {
         <option value="Indirect Light">Indirect Light</option>
         <option value="Low Light">Low Light</option>
       </select>
-      <label htmlFor="water_freq">Water Frequency</label>
-      <select
+      <label htmlFor="water_freq">Watering interval</label>
+      <div className="border-solid border-2 border-black rounded-md mb-1">
+    <input type="number" className="text-center" ref={waterRefInt}/>
+    <select ref={waterRefUnit}>
+      <option value="Day">Day(s)</option>
+      <option value="Week">Week(s)</option>
+      <option value="Month">Month(s)</option>
+    </select>
+    </div>
+      {/* <select
         className="border-solid border-2 border-black rounded-md mb-1 text-center"
         id="water_freq"
         ref={waterRef}
         defaultValue="Water Frequency"
-      >
+      >every 
         <option disabled value="">
           Water Frequency
         </option>
         <option value="Every 7 days">Every 7 days</option>
         <option value="Every 14 days">Every 14 days</option>
-        <option value="Every 30 days">Every 30 days</option>
-      </select>
+        <option value="Every 30 days">Every 30 days</option> days
+      </select> */}
       <label htmlFor="last_watered">Last Watered</label>
       <input className="border-solid border-2 border-black rounded-md mb-1 text-center" ref={lastWateredRef} type="date" id="last_watered" name="last_watered"></input>
       <label htmlFor="note">Note</label>

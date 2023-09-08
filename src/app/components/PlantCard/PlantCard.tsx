@@ -15,7 +15,8 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
   const nameRef = React.useRef<HTMLInputElement>(null);
   const plantTypeRef = React.useRef<HTMLInputElement>(null);
   const lightRef = React.useRef<HTMLSelectElement>(null);
-  const waterRef = React.useRef<HTMLSelectElement>(null);
+  const waterRefInt = React.useRef<HTMLInputElement>(null);
+  const waterRefUnit = React.useRef<HTMLSelectElement>(null);
   const lastWateredRef = React.useRef<HTMLInputElement>(null);
   const noteRef = React.useRef<HTMLTextAreaElement>(null);
 
@@ -30,7 +31,8 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
       plant.lightLevel = lightRef.current?.value || "";
       plant.plantName = nameRef.current?.value || "";
       plant.plantType = plantTypeRef.current?.value || "";
-      plant.waterFrequency = waterRef.current?.value || "";
+      plant.waterFrequencyInt = waterRefInt.current?.value || "";
+      plant.waterFrequencyUnit = waterRefUnit.current?.value || "";
       plant.lastWatered = lastWateredRef.current?.value || "";
       plant.note = noteRef.current?.value || "";
     }
@@ -77,18 +79,20 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
                     <option value="Indirect Light">Indirect Light</option>
                     <option value="Low Light">Low Light</option>
                   </select>
-                  <select
-                    className="text-center border-solid border-2 border-black rounded-md mb-1"
-                    ref={waterRef}
-                    defaultValue={plant.waterFrequency}
-                  >
-                    <option disabled value="">
-                      Water Frequency
-                    </option>
-                    <option value="Every 7 days">Every 7 days</option>
-                    <option value="Every 14 days">Every 14 days</option>
-                    <option value="Every 30 days">Every 30 days</option>
-                  </select>
+                  <div className="text-center border-solid border-2 border-black rounded-md mb-1">
+                    <input type="number"ref={waterRefInt} defaultValue={plant.waterFrequencyInt}/>
+                    <select
+                      ref={waterRefUnit}
+                      defaultValue={plant.waterFrequencyUnit}
+                    >
+                      <option disabled value="">
+                        Water Frequency
+                      </option>
+                      <option value="Day">Day(s)</option>
+                      <option value="Week">Week(s)</option>
+                      <option value="Month">Month(s)</option>
+                    </select>
+                  </div>
                   <label htmlFor="last_watered">Last Watered</label>
                   <input
                     className="border-solid border-2 border-black rounded-md mb-1 text-center"
@@ -96,6 +100,7 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
                     type="date"
                     id="last_watered"
                     name="last_watered"
+                    defaultValue={plant.lastWatered}
                   ></input>
                   <label htmlFor="plant_note">Note</label>
                   <textarea
@@ -149,7 +154,10 @@ const PlantCard: React.FC<PlantCardProps> = ({ plants, setPlants }) => {
                   <h2 className="text-lg font-bold">{plant.plantName}</h2>
                   <h3>{plant.plantType}</h3>
                   <p>Light Level: {plant.lightLevel}</p>
-                  <p>Water frequency: {plant.waterFrequency}</p>
+                  <p>
+                    Watering interval: {plant.waterFrequencyInt}{" "}
+                    {plant.waterFrequencyUnit}
+                  </p>
                   <p>Last Watered: {plant.lastWatered}</p>
                   <p>Note: {plant.note}</p>
                 </>

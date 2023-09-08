@@ -4,7 +4,8 @@ export type PlantT = {
   plantName: string;
   plantType: string;
   lightLevel: string;
-  waterFrequency: string;
+  waterFrequencyInt: string;
+  waterFrequencyUnit: string;
   lastWatered: string;
   note: string;
 };
