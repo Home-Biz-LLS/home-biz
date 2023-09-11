@@ -3,7 +3,7 @@ import React from "react";
 
 type PlantCardProps = {
   statusEdit: (value: boolean) => void;
-  handleDelete: (value: string) => void;
+  handleDelete: (valye: PlantT) => void;
   plant: PlantT;
   handleWaterPlant: (id: string) => void;
 };
@@ -27,11 +27,7 @@ const PlantCard: React.FC<PlantCardProps> = ({
       </button>
       <button
         className="border-solid border-2 border-black rounded-md p-2"
-        onClick={
-          () => {
-            handleDelete(plant.id);
-          }
-        }
+        onClick={() =>handleDelete(plant)}
       >
         Delete
       </button>

@@ -24,12 +24,18 @@ const PlantGallery: React.FC<PlantGalleryProps> = ({ plants, setPlants }) => {
 
   const handleDeleteConfirmed = (id: string) => {
     setPlants(plants.filter((plant) => plant.id !== id));
-    setShowDeleteCheck(false);
+    setShowDeleteCheck(!showDeleteCheck);
+  };
+
+  const handleShowDelete = (plant: PlantT) => {
+    plant.isEditing = true;
+    setShowDeleteCheck(!showDeleteCheck);
   };
 
   const handleEdit = (value: boolean) => {
     setIsEditing(value);
   };
+
   const handleUpdatePlant = (id: string) => {
     const copyOfPlants = plants;
     const plant = copyOfPlants.find((plant) => plant.id === id);
@@ -42,17 +48,16 @@ const PlantGallery: React.FC<PlantGalleryProps> = ({ plants, setPlants }) => {
       plant.lastWatered = lastWateredRef.current?.value || "";
       plant.note = noteRef.current?.value || "";
     }
-
   };
 
   const handleWaterPlant = (id: string) => {
     const copyOfPlants = plants;
     const plant = copyOfPlants.find((plant) => plant.id === id);
-    if(plant) {
-      plant.lastWatered = new Date().toISOString().substring(0,10)
+    if (plant) {
+      plant.lastWatered = new Date().toISOString().substring(0, 10);
     }
-    setPlants([...plants])
-  }
+    setPlants([...plants]);
+  };
 
   return (
     <>
@@ -79,11 +84,19 @@ const PlantGallery: React.FC<PlantGalleryProps> = ({ plants, setPlants }) => {
               ) : (
                 <PlantCard
                   statusEdit={handleEdit}
-                  handleDelete={handleDeleteConfirmed}
+                  handleDelete={handleShowDelete}
                   plant={plant}
                   handleWaterPlant={handleWaterPlant}
                 />
               )}
+              <ConfirmDelete
+                plant={plant}
+                isOpen={showDeleteCheck}
+                title="Are You Sure?"
+                message="Once Plant is Deleted it Cannot be Restored"
+                onConfirm={handleDeleteConfirmed}
+                onCancel={() => setShowDeleteCheck(false)}
+              />
             </article>
           );
         })}
