@@ -1,14 +1,14 @@
-import { NextResponse, NextRequest } from "next/server"
-import { PrismaClient } from "@prisma/client"
+import { NextResponse, NextRequest } from "next/server";
+import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient()
+// const prisma = new PrismaClient()
 
 export const GET = async (req: NextRequest) => {
-  const owners = await prisma.owner.findMany()
-  console.log(owners);
-  
-  return NextResponse.json(owners)
-}
+  // const owners = await prisma.owner.findMany()
+  console.log("I'm Here!");
+
+  return NextResponse.json({ hello: "world" });
+};
 
 // export const POST = async (req: NextRequest) => {
 //   console.log("in the post req")

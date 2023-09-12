@@ -1,15 +1,17 @@
+"use client";
 import prisma from "../../../../prisma/prisma";
 
-const TestCards = async () => {
-  const plants = await prisma.plant.findMany();
+const TestCards = () => {
+  const handlePlants = async () => {
+    const plants = await fetch("/api/user");
+    console.log(plants);
+  };
 
   return (
-    // <div>
-    //   {plants.map((plant, index) => {
-    //     <li key={index}>{plant.name}</li>
-    //   })}
-    // </div>
-  )
-}
+    <div>
+      <button onClick={handlePlants}>Click Me</button>
+    </div>
+  );
+};
 
-export default TestCards
+export default TestCards;
