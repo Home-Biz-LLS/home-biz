@@ -1,5 +1,5 @@
 import React from "react";
-import { PlantT } from "@/app/types";
+// import { PlantT } from "@/app/types";
 
 type EditPlantCardProps = {
   nameRef: React.RefObject<HTMLInputElement>;
@@ -9,7 +9,7 @@ type EditPlantCardProps = {
   waterRefUnit: React.RefObject<HTMLSelectElement>;
   lastWateredRef: React.RefObject<HTMLInputElement>;
   noteRef: React.RefObject<HTMLTextAreaElement>;
-  plant: PlantT;
+  // plant: PlantT;
   statusEdit: (value: boolean) => void;
   handleUpdatePlant: (id: string) => void;
 };
@@ -25,13 +25,13 @@ const EditPlantCard: React.FC<EditPlantCardProps> = ({
   waterRefUnit,
   lastWateredRef,
   noteRef,
-  plant,
+  // plant,
   statusEdit,
   handleUpdatePlant,
 }) => {
   return (
     <>
-      <label htmlFor="plant_name">Plant Name</label>
+      {/* <label htmlFor="plant_name">Plant Name</label>
       <input
         id="plant_name"
         className="border-solid border-2 border-black rounded-md px-1 mb-1"
@@ -112,7 +112,7 @@ const EditPlantCard: React.FC<EditPlantCardProps> = ({
         }}
       >
         Cancel
-      </button>
+      </button> */}
     </>
   );
 };

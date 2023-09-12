@@ -19,7 +19,7 @@ const main = async () => {
       fertiliseFrequency: "DAYS",
       lightLevel: "MEDIUM",
       createdAt: new Date(),
-      ownerId: '2',
+      ownerId: '1',
     },
 
   ]

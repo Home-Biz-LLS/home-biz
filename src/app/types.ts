@@ -1,11 +1,22 @@
-export type PlantT = {
+export type typePlant = {
   id: string;
   isEditing: boolean;
-  plantName: string;
-  plantType: string;
+  name: string;
+  type: string;
   lightLevel: string;
   waterFrequencyInt: string;
   waterFrequencyUnit: string;
   lastWatered: string;
   note: string;
 };
+
+export interface IPlant {
+  id: string;
+  ownerId: string;
+  name: string;
+  lightLevel: string;
+  waterFrequency: string;
+  fertiliseFrequency: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
