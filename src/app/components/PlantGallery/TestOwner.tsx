@@ -11,7 +11,7 @@ const users = await prisma.owner.findMany()
   return (
     <div>
       {/* <button onClick={handlePlants}>Click Me</button> */}
-      {users.map((user,index) => <p key={index}>{user.id}</p>)}
+      {/* {users.map((user,index) => <p key={index}>{user.id}</p>)} */}
     </div>
   );
 };

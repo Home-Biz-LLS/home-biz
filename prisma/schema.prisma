@@ -9,37 +9,42 @@ generator client {
 }
 
 model Owner {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   name      String
-  email     String   @unique
+  email     String    @unique
   plants    Plant[]
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 }
 
 model Plant {
-  id                 String             @id @default(uuid())
-  name               String
-  waterFrequency     WaterFrequency
-  fertiliseFrequency FertiliseFrequency
-  lightLevel         LightLevel
-  owner              Owner              @relation(fields: [ownerId], references: [id])
-  ownerId            String
-  createdAt          DateTime           @default(now())
-  updatedAt          DateTime?           @updatedAt
+  id                   String     @id @default(uuid())
+  name                 String
+  species              String
+  waterCycleValue      Int
+  // waterCycle           WaterCycle
+  fertiliserCycleValue Int
+  // fertiliserCycle      FertiliserCycle
+  lightLevel           LightLevel
+  lastWatered          DateTime
+  note                 String
+  owner                Owner      @relation(fields: [ownerId], references: [id])
+  ownerId              String
+  createdAt            DateTime   @default(now())
+  updatedAt            DateTime?  @updatedAt
 }
 
-enum WaterFrequency {
-  DAYS
-  WEEKS
-  MONTHS
-}
+// enum WaterCycle {
+//   DAYS
+//   WEEKS
+//   MONTHS
+// }
 
-enum FertiliseFrequency {
-  DAYS
-  WEEKS
-  MONTHS
-}
+// enum FertiliserCycle {
+//   DAYS
+//   WEEKS
+//   MONTHS
+// }
 
 enum LightLevel {
   HIGH

@@ -8,7 +8,8 @@ import prisma from "../../prisma/prisma";
 import TestOwner from "./components/PlantGallery/TestOwner";
 import TestPlant from "./components/PlantGallery/TestPlant";
 import axios from "axios";
-import create from "./api/apiHandlers";
+// import create from "./api/apiHandlers";
+import testPost  from "./api/plant/route"
 
 const Home = () => {
   const [plants, setPlants] = React.useState<IPlant[]>([]);
@@ -21,8 +22,15 @@ const Home = () => {
     };
   }, [plants]);
 
-  const handleAddPlant = async (Formdata: FormData) => {
-    const res = await create(Formdata);
+  const handleAddPlant = async (Formdata: any) => {
+    console.log("in handleAdd")
+    const res = await testPost({data: {
+      name: 'big red thing',
+      waterFrequency: 'DAYS',
+      lightLevel: 'HIGH',
+      fertiliseFrequency: 'DAYS',
+      ownerId: '1'
+    }});
     console.log(res);
   };
 
