@@ -20,3 +20,12 @@ export interface IPlant {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface ITestPlant {
+  name: string;
+  species: string;
+  lightLevel: string;
+  wateringInterval: string;
+  lastWatered: string;
+  note: string;
+}
