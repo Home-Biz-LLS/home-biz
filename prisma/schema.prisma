@@ -18,36 +18,36 @@ model Owner {
 }
 
 model Plant {
-  id                   String     @id @default(uuid())
+  id                   String          @id @default(uuid())
   name                 String
   species              String
   waterCycleValue      Int
-  // waterCycle           WaterCycle
+  waterCycle           WaterCycle
   fertiliserCycleValue Int
-  // fertiliserCycle      FertiliserCycle
+  fertiliserCycle      FertiliserCycle
   lightLevel           LightLevel
   lastWatered          DateTime
-  note                 String
-  owner                Owner      @relation(fields: [ownerId], references: [id])
+  note                 String?
+  owner                Owner           @relation(fields: [ownerId], references: [id])
   ownerId              String
-  createdAt            DateTime   @default(now())
-  updatedAt            DateTime?  @updatedAt
+  createdAt            DateTime        @default(now())
+  updatedAt            DateTime?       @updatedAt
 }
 
-// enum WaterCycle {
-//   DAYS
-//   WEEKS
-//   MONTHS
-// }
+enum WaterCycle {
+  Day
+  Week
+  Month
+}
 
-// enum FertiliserCycle {
-//   DAYS
-//   WEEKS
-//   MONTHS
-// }
+enum FertiliserCycle {
+  Day
+  Week
+  Month
+}
 
 enum LightLevel {
-  HIGH
-  MEDIUM
-  LOW
+  High
+  Medium
+  Low
 }
