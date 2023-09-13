@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { IPlant } from "./types";
+import { IPostPlant, IPlant } from "./interface";
 import AddPlant from "./components/AddPlant/AddPlant";
 import PlantGallery from "./components/PlantGallery/PlantGallery";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -8,29 +8,27 @@ import prisma from "../../prisma/prisma";
 import TestOwner from "./components/PlantGallery/TestOwner";
 import TestPlant from "./components/PlantGallery/TestPlant";
 import axios from "axios";
-// import create from "./api/apiHandlers";
-import testPost  from "./api/plant/route"
+import { addPlant, getPlants } from "./api/plant/route";
 
 const Home = () => {
   const [plants, setPlants] = React.useState<IPlant[]>([]);
 
   React.useEffect(() => {
-    async () => {
-      const plants = await prisma.plant.findMany({ where: { ownerId: "1" } });
-      console.log(plants);
+    (async () => {
+      const plants = await getPlants();
       setPlants(plants);
-    };
-  }, [plants]);
+    })();
+  }, []);
 
-  const handleAddPlant = async (Formdata: any) => {
-    console.log("in handleAdd")
-    const res = await testPost({data: {
-      name: 'big red thing',
-      waterFrequency: 'DAYS',
-      lightLevel: 'HIGH',
-      fertiliseFrequency: 'DAYS',
-      ownerId: '1'
-    }});
+  const handleAddPlant = async (data: IPostPlant) => {
+    console.log("in handleAdd");
+    console.log(data);
+    const res = await addPlant({
+      data: {
+        ownerId: "1",
+        ...data,
+      },
+    });
     console.log(res);
   };
 

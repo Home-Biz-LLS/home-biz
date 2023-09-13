@@ -1,5 +1,4 @@
-// import { PlantT } from "@/app/types";
-import { IPlant } from "@/app/types";
+import { IPlant } from "@/app/interface";
 import React from "react";
 
 type PlantCardProps = {
@@ -9,8 +8,7 @@ type PlantCardProps = {
   // handleWaterPlant: (id: string) => void;
 };
 
-const PlantCard: React.FC<PlantCardProps>= ({plant}) => {
-   
+const PlantCard: React.FC<PlantCardProps> = ({ plant }) => {
   return (
     <>
       {/* <button
@@ -30,13 +28,12 @@ const PlantCard: React.FC<PlantCardProps>= ({plant}) => {
       </button>
       <button className="border-solid border-2 border-black rounded-md p-2" onClick={() => handleWaterPlant(plant.id)}>Water Plant</button> */}
       <h2 className="text-lg font-bold">{plant.name}</h2>
-      {/* <h3>{plant.type}</h3> */}
+      <h3>{plant.species}</h3>
       <p>Light Level: {plant.lightLevel}</p>
-      <p>
-        Watering interval: {plant.waterFrequency} {plant.waterFrequency}
-      </p>
-      {/* <p>Last Watered: {plant.lastWatered}</p>
-      <p>Note: {plant.note}</p> */}
+      <p>Water cycle: {plant.waterCycleValue} Days</p>
+      <p>Fertiliser Cycle: {plant.fertiliserCycleValue} Days</p>
+      <p>Last Watered: {plant.lastWatered.toString().substring(0, 10)}</p>
+      <p>Note: {plant.note}</p>
     </>
   );
 };

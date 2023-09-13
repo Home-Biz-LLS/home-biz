@@ -1,5 +1,5 @@
 "use client";
-import { ITestPlant } from "@/app/types";
+import { IPostPlant } from "@/app/interface";
 import React from "react";
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -16,33 +16,30 @@ interface UsernameFormElement extends HTMLFormElement {
 }
 
 type AddPlantProps = {
-  // plants: IPlant[];
-  handleAddPlant: (value: any) => void;
+  handleAddPlant: (value: IPostPlant) => void;
 };
 
 const AddPlant: React.FC<AddPlantProps> = ({ handleAddPlant }) => {
-  const lightOptions = ["High", "Medium", "Low"];
+  const lightOptions = ["HIGH", "MEDIUM", "LOW"];
   // const waterFreqUnitOptions = ["Day(s)", "Week(s)", "Month(s)"];
 
-  const handleData = (event: React.FormEvent<UsernameFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<UsernameFormElement>) => {
     event.preventDefault();
 
     const data = {
       name: event.currentTarget.elements.plant_name.value,
       species: event.currentTarget.elements.plant_species.value,
       lightLevel: event.currentTarget.elements.light_level.value,
-      wateringInterval: event.currentTarget.elements.water_freq.value,
-      fertilisingInterval: event.currentTarget.elements.fertilising_freq.value,
-      lastWatered: event.currentTarget.elements.last_watered.value,
+      waterCycleValue: Number(event.currentTarget.elements.water_freq.value),
+      fertiliserCycleValue: Number(
+        event.currentTarget.elements.fertilising_freq.value
+      ),
+      lastWatered: new Date(event.currentTarget.elements.last_watered.value),
       note: event.currentTarget.elements.note.value,
     };
-    console.log(data);
-    return data;
-  };
 
-  const handleSubmit = (event: React.FormEvent<UsernameFormElement>) => {
-    const plant = handleData(event);
-    handleAddPlant(plant);
+    handleAddPlant(data);
+    console.log(data);
   };
 
   return (
@@ -57,7 +54,7 @@ const AddPlant: React.FC<AddPlantProps> = ({ handleAddPlant }) => {
         id="plant_name"
         name="plant_name"
         type="text"
-        placeholder="Big red in the window"
+        placeholder="eg. 'Big red' or 'Doris'"
       />
       <label htmlFor="plant_species">Species</label>
       <input
@@ -65,7 +62,7 @@ const AddPlant: React.FC<AddPlantProps> = ({ handleAddPlant }) => {
         id="plant_species"
         name="plant_species"
         type="text"
-        placeholder="Monstera"
+        placeholder="eg 'Orchis italica'"
       />
       <label htmlFor="light_level">Light Level</label>
       <select
