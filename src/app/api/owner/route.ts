@@ -1,14 +1,23 @@
-import { NextResponse, NextRequest } from "next/server";
+'user server';
 import prisma from "../../../../prisma/prisma";
 
+const getOwners = async () => {
+  return await prisma.owner.findMany();
+}
 
-export const GET = async (req: NextRequest) =>{
-  console.log("in Get req")
-  const owners = await prisma.owner.findMany()
-  console.log(owners);
+export default getOwners;
 
-  return NextResponse.json(owners);
-};
+// import { NextResponse, NextRequest } from "next/server";
+// import prisma from "../../../../prisma/prisma";
+
+
+// export const GET = async (req: NextRequest) =>{
+//   console.log("in Get req")
+//   const owners = await prisma.owner.findMany()
+//   console.log(owners);
+
+//   return NextResponse.json(owners);
+// };
 
 // export const POST = async (req: NextRequest) => {
 //   console.log("in the post req")
